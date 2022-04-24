@@ -7,5 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ray",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "eris": "^0.16.1"
+  }
 }
