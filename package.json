@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.0.0",
+    "jsoning": "^0.13.23",
     "undici": "^5.0.0"
   }
 }
