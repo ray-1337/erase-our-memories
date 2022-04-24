@@ -60,7 +60,7 @@ async function collectMessages(restartMsgID) {
 
         await deleteMessage(messageIDLoop[i]);
 
-        const delayTime = randomTimer(ms("30s"), ms("2m"));
+        const delayTime = randomTimer(ms("10s"), ms("2m"));
 
         console.log(`${messageIDLoop[i]} delay time: ${delayTime} ms`);
         
