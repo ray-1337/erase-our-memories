@@ -47,7 +47,7 @@ async function collectMessages(restartMsgID) {
     let array = await fetchMessages.body.json();
     if (array instanceof Array) {
       messageIDLoop = array
-      .filter(x => x.type == 0 && x.author.id == config.authorID)
+      .filter(x => [0, 19].includes(x.type) && x.author.id == config.authorID)
       .sort((a, b) => a.id - b.id)
       .map(x => x.id);
     };
