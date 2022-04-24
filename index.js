@@ -48,7 +48,7 @@ async function collectMessages(restartMsgID) {
     if (array instanceof Array) {
       messageIDLoop = array
       .filter(x => x.type == 0 && x.author.id == config.authorID)
-      .sort((a, b) => a.timestamp - b.timestamp)
+      .sort((a, b) => a.id - b.id)
       .map(x => x.id);
     };
 
