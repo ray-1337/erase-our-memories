@@ -27,7 +27,7 @@ function randomTimer(min, max) {
 async function collectMessages(restartMsgID) {
   if (pause.threshold > pause.limit) {
     console.log("Cooldown started.");
-    let limitTime = ms("1h");
+    let limitTime = ms("15m");
     await delay(limitTime);
     pause.threshold = 0;
     console.log("Cooldown ended.");
