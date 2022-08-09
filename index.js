@@ -39,7 +39,10 @@ async function collectMessages(restartMsgID) {
       method: "GET", headers
     });
 
-    if (!fetchMessages) return stop();
+    if (!fetchMessages) {
+      console.log("Unable to fetch messages.")
+      return stop();
+    };
 
     console.log(`Check ${startPoint}`)
   
@@ -52,7 +55,10 @@ async function collectMessages(restartMsgID) {
       .map(x => x.id);
     };
 
-    if (!array || !array.length) return stop();
+    if (!array?.length) {
+      console.log("No content presented in array.")
+      return stop();
+    };
 
     if (messageIDLoop.length) {
       for (let i = 0; i < messageIDLoop.length; i++) {
@@ -79,6 +85,7 @@ async function collectMessages(restartMsgID) {
         continue;
       };
     } else {
+      console.log("No messages presented.")
       return stop();
     };
 
