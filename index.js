@@ -1,4 +1,4 @@
-const Undici = require("undici");
+const {request} = require("undici");
 const ms = require("ms");
 const jsoning = require("jsoning");
 const {webcrypto} = require("crypto");
@@ -36,7 +36,7 @@ async function collectMessages(restartMsgID) {
 
   try {
     let startPoint = restartMsgID ? restartMsgID : config.startMessageID;
-    const fetchMessages = await Undici.request(baseURL + `/channels/${config.channelID}/messages?after=${startPoint}&limit=${limit}`, {
+    const fetchMessages = await request(baseURL + `/channels/${config.channelID}/messages?after=${startPoint}&limit=${limit}`, {
       method: "GET", headers
     });
 
@@ -99,7 +99,7 @@ async function collectMessages(restartMsgID) {
 
 async function deleteMessage(messageID) {
   try {
-    await Undici.request(baseURL + `/channels/${config.channelID}/messages/${messageID}`, {
+    await request(baseURL + `/channels/${config.channelID}/messages/${messageID}`, {
       method: "DELETE", headers
     });
 
