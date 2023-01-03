@@ -1,6 +1,7 @@
 const Undici = require("undici");
 const ms = require("ms");
 const jsoning = require("jsoning");
+const {webcrypto} = require("crypto");
 
 const storage = new jsoning("./messageID.json");
 
@@ -18,9 +19,9 @@ let pause = {
 };
 
 function randomTimer(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min) + min);
+  const array = new Uint32Array(1);
+  webcrypto.getRandomValues(array);
+  return min + (array[0] % (max - min + 1));
 };
 
 // first, collect all the messages, slowly + filtering
