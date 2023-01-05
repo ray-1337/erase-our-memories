@@ -67,11 +67,13 @@ async function collectMessages(restartMsgID) {
 
         await deleteMessage(messageIDLoop[i]);
 
-        const delayTime = randomTimer(randomTimer(ms("5s"), ms("30s")), randomTimer(ms("30s"), ms("90s")));
+        const delayStop = 5;
 
-        console.log(`${messageIDLoop[i]} delay time: ${delayTime} ms`);
-        
-        await delay(delayTime);
+        if (i !== 0 && i % delayStop == 0) {
+          const delayTime = randomTimer(ms("45s"), ms("90s"));
+          console.log(`${messageIDLoop[i]} delay time: ${delayTime} ms`);
+          await delay(delayTime);
+        };
 
         if (messageIDLoop.length == i) {
           pause.threshold = ++pause.threshold;
