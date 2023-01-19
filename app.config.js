@@ -6,7 +6,7 @@ module.exports = {
       "restart_delay": 120000,
       "cwd": process.cwd(),
       "exp_backoff_restart_delay": 30000,
-      "name": "e_o_m",
+      "name": "eom",
       "script": "node index"
     }
   ]
