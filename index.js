@@ -35,7 +35,7 @@ async function collectMessages(restartMsgID) {
 
   try {
     let startPoint = restartMsgID ? restartMsgID : config.startMessageID;
-    const fetchMessages = await request(baseURL + `/channels/${config.channelID}/messages?after=${startPoint}&limit=${limit}`, {
+    const fetchMessages = await request(baseURL + `/channels/${config.channelID}/messages?around=${startPoint}&limit=${limit}`, {
       method: "GET", headers
     });
 
