@@ -64,20 +64,21 @@ async function collectMessages(restartMsgID) {
 
     if (messageIDLoop.length) {
       for (let i = 0; i < messageIDLoop.length; i++) {
-        checkpoint = messageIDLoop[i];
+        const messageID = messageIDLoop[i];
+        checkpoint = messageID
 
-        await deleteMessage(messageIDLoop[i]);
+        await deleteMessage(messageID);
 
         if (i !== 0 && i % delayStop == 0) {
           const delayTime = randomTimer(ms("15s"), ms("30s"));
-          console.log(`${messageIDLoop[i]} delay time: ${delayTime} ms`);
+          console.log(`${messageID} delay time: ${delayTime} ms`);
           await delay(delayTime);
         };
 
         if (messageIDLoop.length - 1 === i) {
           pause.threshold = ++pause.threshold;
 
-          collectMessages(messageIDLoop[i]);
+          collectMessages(messageID);
 
           messageIDLoop = [];
 
