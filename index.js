@@ -1,6 +1,9 @@
 const {request} = require("undici");
 const ms = require("ms");
 const {webcrypto} = require("crypto");
+const path = require("node:path");
+const fs = require("node:fs/promises");
+const {existsSync} = require("node:fs");
 
 let checkpoint = null;
 
@@ -8,6 +11,8 @@ const config = require("./config");
 const baseURL = "https://discord.com/api/v" + config.apiVersion;
 const limit = 100;
 const delayStop = 5; // how much will be deleted in a single session before cooldown
+
+const checkpointPath = path.join(__dirname, "messageID");
 
 const headers = {
   Authorization: config.token,
@@ -23,7 +28,11 @@ function randomTimer(min, max) {
 // first, collect all the messages, slowly + filtering
 async function collectMessages(restartMsgID) {
   try {
-    let startPoint = restartMsgID || config.startMessageID;
+    if (!existsSync(checkpointPath)) {
+      await fs.writeFile(checkpointPath, "", "utf-8");
+    };
+
+    let startPoint = restartMsgID || (await fs.readFile(checkpointPath)).toString("utf-8") || config.startMessageID;
     const fetchMessages = await request(baseURL + `/channels/${config.channelID}/messages?around=${startPoint}&limit=${limit}`, {
       method: "GET", headers
     });
@@ -66,7 +75,10 @@ async function collectMessages(restartMsgID) {
         if (messageIDLoop.length + 1 === i) {
           console.log("End of line, trying to get more messages.");
 
-          await collectMessages(messageID);
+          await Promise.all([
+            collectMessages(messageID),
+            fs.writeFile(checkpointPath, messageID, "utf-8")
+          ]);
 
           messageIDLoop = [];
 
