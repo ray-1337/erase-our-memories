@@ -14,11 +14,6 @@ const headers = {
   "User-Agent": "Mozilla/5.0 (Linux; Android 8.0.0; ASUS_X00QD) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Mobile Safari/537.36"
 };
 
-let pause = {
-  threshold: 0,
-  limit: 5
-};
-
 function randomTimer(min, max) {
   const array = new Uint32Array(1);
   webcrypto.getRandomValues(array);
@@ -27,14 +22,6 @@ function randomTimer(min, max) {
 
 // first, collect all the messages, slowly + filtering
 async function collectMessages(restartMsgID) {
-  if (pause.threshold > pause.limit) {
-    console.log("Cooldown started.");
-    let limitTime = ms("15m");
-    await delay(limitTime);
-    pause.threshold = 0;
-    console.log("Cooldown ended.");
-  };
-
   try {
     let startPoint = restartMsgID || config.startMessageID;
     const fetchMessages = await request(baseURL + `/channels/${config.channelID}/messages?around=${startPoint}&limit=${limit}`, {
@@ -79,9 +66,7 @@ async function collectMessages(restartMsgID) {
         if (messageIDLoop.length + 1 === i) {
           console.log("End of line, trying to get more messages.");
 
-          pause.threshold = ++pause.threshold;
-
-          collectMessages(messageID);
+          await collectMessages(messageID);
 
           messageIDLoop = [];
 
