@@ -5,7 +5,7 @@ const {webcrypto} = require("crypto");
 let checkpoint = null;
 
 const config = require("./config");
-const baseURL = "https://discord.com/api/" + config.apiVersion;
+const baseURL = "https://discord.com/api/v" + config.apiVersion;
 const limit = 100;
 const delayStop = 5; // how much will be deleted in a single session before cooldown
 
