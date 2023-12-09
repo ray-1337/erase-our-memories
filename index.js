@@ -2,7 +2,7 @@ const {request} = require("undici");
 const ms = require("ms");
 const {webcrypto} = require("crypto");
 
-const checkpoint = null;
+let checkpoint = null;
 
 const config = require("./config");
 const baseURL = "https://discord.com/api/v9";
