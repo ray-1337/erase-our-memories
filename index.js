@@ -93,7 +93,7 @@ async function collectMessages(restartMsgID) {
       return stop();
     };
 
-    return stop();
+    return;
   } catch (error) {
     console.error(error);
     return stop();
