@@ -7,6 +7,8 @@ let checkpoint = null;
 const config = require("./config");
 const baseURL = "https://discord.com/api/" + config.apiVersion;
 const limit = 100;
+const delayStop = 5; // how much will be deleted in a single session before cooldown
+
 const headers = {
   Authorization: config.token,
   "User-Agent": "Mozilla/5.0 (Linux; Android 8.0.0; ASUS_X00QD) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Mobile Safari/537.36"
@@ -65,8 +67,6 @@ async function collectMessages(restartMsgID) {
         checkpoint = messageIDLoop[i];
 
         await deleteMessage(messageIDLoop[i]);
-
-        const delayStop = 5;
 
         if (i !== 0 && i % delayStop == 0) {
           const delayTime = randomTimer(ms("15s"), ms("30s"));
