@@ -1,9 +1,8 @@
-const dotenv = require("dotenv");
-const secret = dotenv.config({path: process.cwd() + "/.env"});
+require("dotenv/config");
 
 module.exports = {
-  authorID: secret.parsed["AUTHOR"],
-  startMessageID: secret.parsed["STARTID"],
-  token: secret.parsed["TOKEN"],
-  channelID: secret.parsed["CHANNELID"]
+  authorID: process.env.AUTHOR,
+  startMessageID: process.env.STARTID,
+  token: process.env.TOKEN,
+  channelID: process.env.CHANNELID,
 };
