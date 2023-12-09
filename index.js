@@ -124,7 +124,7 @@ async function main() {
 };
 
 function stop() {
-  return process.exit(1);
+  return process.exit(128);
 };
 
 main();
