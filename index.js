@@ -76,7 +76,7 @@ async function collectMessages(restartMsgID) {
           await delay(delayTime);
         };
 
-        if (messageIDLoop.length == i) {
+        if (messageIDLoop.length - 1 === i) {
           pause.threshold = ++pause.threshold;
 
           collectMessages(messageID);
