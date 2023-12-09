@@ -68,6 +68,7 @@ async function collectMessages(restartMsgID) {
         checkpoint = messageID
 
         await deleteMessage(messageID);
+        console.log(`Deleted ${messageID} [${i} / ${messageIDLoop.length}]`)
 
         if (i !== 0 && i % delayStop == 0) {
           const delayTime = randomTimer(ms("15s"), ms("30s"));
@@ -104,8 +105,6 @@ async function deleteMessage(messageID) {
     await request(baseURL + `/channels/${config.channelID}/messages/${messageID}`, {
       method: "DELETE", headers
     });
-
-    console.log(`Deleted ${messageID}`)
   } catch (error) {
     console.error(error);
   };
