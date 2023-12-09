@@ -76,7 +76,7 @@ async function collectMessages(restartMsgID) {
           await delay(delayTime);
         };
 
-        if (messageIDLoop.length - 1 === i) {
+        if (messageIDLoop.length + 1 === i) {
           console.log("End of line, trying to get more messages.");
 
           pause.threshold = ++pause.threshold;
