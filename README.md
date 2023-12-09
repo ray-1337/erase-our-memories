@@ -19,6 +19,6 @@ I know and super aware that this method considered as selfbot, and everything is
 Just don't tell anyone. Why would you?
 
 ## License
-[WTFPL](http://www.wtfpl.net/), or in formal attempt, [UNLICENSE](https://unlicense.org/)
+[WTFPL](http://www.wtfpl.net/), or in formal attempt, [MIT](https://opensource.org/license/mit/)
 
 No need to give me a credit, because everyone can make the same code like this too.
