@@ -1,9 +1,8 @@
 const {request} = require("undici");
 const ms = require("ms");
-const jsoning = require("jsoning");
 const {webcrypto} = require("crypto");
 
-const storage = new jsoning("./messageID.json");
+const checkpoint = null;
 
 const config = require("./config");
 const baseURL = "https://discord.com/api/v9";
@@ -63,7 +62,7 @@ async function collectMessages(restartMsgID) {
 
     if (messageIDLoop.length) {
       for (let i = 0; i < messageIDLoop.length; i++) {
-        await storage.set("checkpoint", messageIDLoop[i]);
+        checkpoint = messageIDLoop[i];
 
         await deleteMessage(messageIDLoop[i]);
 
@@ -117,9 +116,7 @@ async function delay(ms) {
 
 async function main() {
   try {
-    let checkpoint = await storage.get("checkpoint");
-    if (checkpoint) collectMessages(checkpoint);
-    else collectMessages();
+    collectMessages(checkpoint || undefined)
   } catch (error) {
     console.error(error);
     return stop();
