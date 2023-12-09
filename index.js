@@ -61,10 +61,9 @@ async function collectMessages(restartMsgID) {
     if (messageIDLoop.length) {
       for (let i = 0; i < messageIDLoop.length; i++) {
         const messageID = messageIDLoop[i];
-        checkpoint = messageID
 
         await deleteMessage(messageID);
-        console.log(`Deleted ${messageID} [${i} / ${messageIDLoop.length}]`)
+        console.log(`Deleted ${messageID} [${i + 1} / ${messageIDLoop.length}]`)
 
         if (i !== 0 && i % delayStop == 0) {
           const delayTime = randomTimer(ms("15s"), ms("30s"));
@@ -72,7 +71,7 @@ async function collectMessages(restartMsgID) {
           await delay(delayTime);
         };
 
-        if (messageIDLoop.length + 1 === i) {
+        if (messageIDLoop.length === i + 1) {
           console.log("End of line, trying to get more messages.");
 
           await Promise.all([
