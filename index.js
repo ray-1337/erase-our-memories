@@ -42,7 +42,7 @@ async function collectMessages(restartMsgID) {
     });
 
     if (!fetchMessages || fetchMessages.statusCode >= 400) {
-      console.log("Unable to fetch messages.")
+      console.log("Unable to fetch messages.", `[${fetchMessages.statusCode}] ${await fetchMessages.body.text()}`)
       return stop();
     };
 
