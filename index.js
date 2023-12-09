@@ -116,7 +116,7 @@ async function delay(ms) {
 
 async function main() {
   try {
-    collectMessages(checkpoint || undefined)
+    await collectMessages(checkpoint || undefined);
   } catch (error) {
     console.error(error);
     return stop();
