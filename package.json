@@ -1,6 +1,7 @@
 {
   "name": "erase-our-memories",
   "description": "Slowly prune DM messages on Discord.",
+  "packageManager": "pnpm@8.11.0",
   "main": "index.js",
   "private": true,
   "scripts": {
