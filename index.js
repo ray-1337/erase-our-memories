@@ -69,7 +69,7 @@ async function collectMessages(restartMsgID) {
         const delayStop = 5;
 
         if (i !== 0 && i % delayStop == 0) {
-          const delayTime = randomTimer(ms("45s"), ms("90s"));
+          const delayTime = randomTimer(ms("15s"), ms("30s"));
           console.log(`${messageIDLoop[i]} delay time: ${delayTime} ms`);
           await delay(delayTime);
         };
