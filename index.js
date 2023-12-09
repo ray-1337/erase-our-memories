@@ -5,7 +5,7 @@ const {webcrypto} = require("crypto");
 let checkpoint = null;
 
 const config = require("./config");
-const baseURL = "https://discord.com/api/v9";
+const baseURL = "https://discord.com/api/" + config.apiVersion;
 const limit = 100;
 const headers = {
   Authorization: config.token,
@@ -74,7 +74,7 @@ async function collectMessages(restartMsgID) {
           await delay(delayTime);
         };
 
-        if (messageIDLoop.length == i) {
+        if (messageIDLoop.length - 1 === i) {
           pause.threshold = ++pause.threshold;
 
           collectMessages(messageIDLoop[i]);

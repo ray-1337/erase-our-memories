@@ -5,4 +5,5 @@ module.exports = {
   startMessageID: process.env.STARTID,
   token: process.env.TOKEN,
   channelID: process.env.CHANNELID,
+  apiVersion: 10
 };
